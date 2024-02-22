@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ct-echo-server
+  name: ${{ values.name | dump }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: ct-echo-server
+      app: ${{ values.name | dump }}
   template:
     metadata:
       labels:
-        app: ct-echo-server
+        app: ${{ values.name | dump }}
     spec:
       containers:
-      - image: ghcr.io/backstage-ct/ct-echo-server:latest
-        name: ct-echo-server
+      - image: ghcr.io/backstage-ct/${{ values.name | dump }}:latest
+        name: ${{ values.name | dump }}
         ports:
         - containerPort: 80
