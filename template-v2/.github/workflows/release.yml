@@ -8,10 +8,7 @@ on:
 jobs:
   release:
     env:
-      random: "${{ github.actor }}"
-      random2: '${{ github.actor }}'
-      random3: `${{ '${{ github.actor }}' }}`
-      random5: `${{ github.actor }}`
+      random3: ${{ '${{ github.actor }}' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
