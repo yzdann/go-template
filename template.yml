@@ -33,3 +33,6 @@ spec:
         allowedHosts: ['github.com']
         description: This is a test
         repoUrl: github.com?repo=${{ parameters.name }}&owner=backstage-ct
+        defaultBranch: main
+        repoVisibility: public
+
