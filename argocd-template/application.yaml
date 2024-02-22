@@ -5,6 +5,8 @@ metadata:
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
+  annotations:
+    backstage.io/kubernetes-id: argocd
 spec:
   destination:
     namespace: ${{ values.name }}
