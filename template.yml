@@ -24,7 +24,7 @@ spec:
       name: Fetch Base
       action: fetch:template
       input:
-        url: ./templatev2
+        url: ./template-v2
 
     - id: publish
       name: Publish
