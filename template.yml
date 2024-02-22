@@ -28,7 +28,6 @@ spec:
         values:
           name: ${{ parameters.name }}
 
-
     - id: publish
       name: Publish
       action: publish:github
@@ -73,9 +72,19 @@ spec:
         title: Creating a new argocd application for hackathon
         sourcePath: ./argocd-hackathon-demo
 
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: './service-catalog/catalog.yaml'
+
   output:
     links:
       - title: Repository
         url: ${{ steps['publish'].output.remoteUrl }}
       - title: Argo Pull Request
         url: ${{ steps['pr-to-argo-repo'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
