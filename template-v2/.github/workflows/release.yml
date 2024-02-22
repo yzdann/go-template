@@ -11,7 +11,6 @@ jobs:
       random: "${{ github.actor }}"
       random2: '${{ github.actor }}'
       random3: `${{ '${{ github.actor }}' }}`
-      random4: `${{ ${{ github.actor }} }}`
       random5: `${{ github.actor }}`
     runs-on: ubuntu-latest
     permissions:
