@@ -72,3 +72,10 @@ spec:
         gitCommitMessage: Add new application ${{ parameters.name }}.
         title: Creating a new argocd application for hackathon
         sourcePath: ./argocd-hackathon-demo
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Argo Pull Request
+        url: ${{ steps['pr-to-argo-repo'].output.remoteUrl }}
