@@ -52,7 +52,7 @@ spec:
       action: fetch:plain
       input:
         url: https://github.com/backstage-ct/argocd-hackathon-demo.git
-        targetPath: argocd
+        targetPath: argocd-hackathon-demo
 
     - id: copy-application
       name: Copy argocd application file
@@ -60,7 +60,7 @@ spec:
       input:
         files:
           - from: ./application.yaml
-            to: ./argocd/${{ parameters.name }}-argocd-application.yaml
+            to: ./argocd-hackathon-demo/argocd/${{ parameters.name }}-argocd-application.yaml
 
     - id: pr-to-argo-repo
       name: PR to ArgoCD repo
@@ -71,4 +71,4 @@ spec:
         branchName: ${{ parameters.name }}-argocd-application
         gitCommitMessage: Add new application ${{ parameters.name }}.
         title: Creating a new argocd application for hackathon
-        sourcePath: ./argocd-template
+        sourcePath: ./argocd-hackathon-demo
