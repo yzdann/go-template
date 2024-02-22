@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ct-echo-server
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ct-echo-server
+  template:
+    metadata:
+      labels:
+        app: ct-echo-server
+    spec:
+      containers:
+      - image: ghcr.io/backstage-ct/ct-echo-server:latest
+        name: ct-echo-server
+        ports:
+        - containerPort: 80
