@@ -20,13 +20,14 @@ spec:
           ui:autofocus: true
 
   steps:
-    - id: fetch-base
+    - id: fetch-base-repo
       name: Fetch Base
       action: fetch:template
       input:
         url: ./template-v2
         values:
           name: ${{ parameters.name }}
+
 
     - id: publish
       name: Publish
@@ -38,3 +39,36 @@ spec:
         defaultBranch: main
         repoVisibility: public
 
+    - id: fetch-base-argocd
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./argocd-template
+        values:
+          name: ${{ parameters.name }}
+
+    - id: fetch-remote-argocd-repo
+      name: Fetch Remote ArgoCD Repo
+      action: fetch:plain
+      input:
+        url: https://github.com/backstage-ct/argocd-hackathon-demo.git
+        targetPath: argocd
+
+    - id: copy-application
+      name: Copy argocd application file
+      action: fs:rename
+      input:
+        files:
+          - from: ./application.yaml
+            to: ./argocd/${{ parameters.name }}-argocd-application.yaml
+
+    - id: pr-to-argo-repo
+      name: PR to ArgoCD repo
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=argocd-hackathon-demo&owner=backstage-ct
+        description: Pull request for ${{ parameters.name }}-argocd-application.
+        branchName: ${{ parameters.name }}-argocd-application
+        gitCommitMessage: Add new application ${{ parameters.name }}.
+        title: Creating a new argocd application for hackathon
+        sourcePath: ./argocd-template
