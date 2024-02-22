@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${{ values.name | dump }}
+  name: ${{ values.name }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: ${{ values.name | dump }}
+      app: ${{ values.name }}
   template:
     metadata:
       labels:
-        app: ${{ values.name | dump }}
+        app: ${{ values.name }}
     spec:
       containers:
-      - image: ghcr.io/backstage-ct/${{ values.name | dump }}:latest
-        name: ${{ values.name | dump }}
+      - image: ghcr.io/backstage-ct/${{ values.name }}:latest
+        name: ${{ values.name }}
         ports:
         - containerPort: 80
